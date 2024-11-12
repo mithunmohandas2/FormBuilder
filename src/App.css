@@ -1,0 +1,247 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* PersonalInfoForm.css */
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #f5f5f5;
+}
+
+form {
+  width: 100%;
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin: 2rem;
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+h3 {
+  color: #555;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  color: #333;
+  font-weight: bold;
+  margin: 1rem 0 0.5rem;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #333;
+}
+
+select {
+  color: #333;
+  appearance: none;
+  background-color: #fff;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 4px rgba(76, 175, 80, 0.3);
+}
+
+
+
+/* --------- Style for the HomePage container ---------- */
+.homepage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f0f4f8;
+  /* Light background color */
+  font-family: Arial, sans-serif;
+}
+
+.homepage-title {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  /* Space between links */
+}
+
+.nav-link {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background-color: #4CAF50;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #349238;
+  /* Darker blue on hover */
+  color: #fff;
+  transform: scale(1.07);
+}
+
+/* --------- End : Style for the HomePage container ---------- */
+
+.homeLink {
+  position: absolute;
+  top: 4%;
+  right: 4px;
+  margin-right: 3rem;
+  color: green;
+}
+
+/* --------- Style for Table ---------- */
+
+/* Center the table within its container */
+.table-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Style the table */
+.form-table {
+  width: 100%;
+  max-width: 1200px;
+  border-collapse: collapse;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styles */
+.form-table th {
+  padding: 12px;
+  background-color: #4CAF50;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+
+/* Cell styles */
+.form-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Row styling */
+.form-table tr:nth-child(even) {
+  background-color: #f1f1f1;
+}
+
+/* Hover effect */
+.form-table tr:hover {
+  background-color: #e9e9e9;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .form-table {
+    font-size: 0.9rem;
+  }
+
+  .form-table th, .form-table td {
+    padding: 10px;
+  }
+}
+
+/* --------- End : Style for Table ---------- */

@@ -5,8 +5,9 @@ import FormDataTable from "./FormDataTable";
 
 function SubmittedForms() {
     const [currentForm, setCurrentForm] = useState<string>("0");
-    const [formsConfigData, setFormsConfigData] = useState(formsConfigDataSample);
-    const [filledFormData, setFilledFormData] = useState([
+    const [formsConfigData, ] = useState(formsConfigDataSample);
+    //setFormsConfigData,  setFilledFormData
+    const [filledFormData, ] = useState([
         {
             "fullName": "Flavia Warner",
             "preferredName": "Tucker Forbes",

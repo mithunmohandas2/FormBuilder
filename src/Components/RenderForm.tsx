@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 
 const RenderForm: React.FC = () => {
     const [currentForm, setCurrentForm] = useState<string>("0");
-    const [formsConfigData, setFormsConfigData] = useState(formsConfigDataSample);
+    // const [formsConfigData, setFormsConfigData] = useState(formsConfigDataSample);
+    const [formsConfigData] = useState(formsConfigDataSample);
 
     return (
         <div>

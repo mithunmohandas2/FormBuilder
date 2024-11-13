@@ -7,11 +7,6 @@ const RenderForm: React.FC = () => {
     const [currentForm, setCurrentForm] = useState<string>("0");
     const [formsConfigData, setFormsConfigData] = useState(formsConfigDataSample);
 
-    const handleFormSubmit = (formData: Record<string, any>) => {
-        console.log('Form Submitted:', formData);
-        alert('Data submitted successfully');
-    };
-
     return (
         <div>
             <div style={{  marginLeft: '4rem',  marginRight: '4rem'}}>
@@ -25,10 +20,7 @@ const RenderForm: React.FC = () => {
                 </select>
             </div>
 
-            <DynamicForm
-                formConfig={formsConfigData[parseInt(currentForm)]}
-                onSubmit={handleFormSubmit}
-            />
+            <DynamicForm formConfig={formsConfigData[parseInt(currentForm)]} />
 
             <Link to="/" className="homeLink"> 🔙 Home Page </Link>
         </div>

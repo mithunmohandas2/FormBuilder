@@ -4,7 +4,7 @@ function HomePage() {
     return (
         <div className="homepage-container">
             <h1 className="homepage-title">Form Builder</h1>
-            <img src="https://formpress.org/images/hero.png" alt="Form Builder Banner" />
+            <img width={350} src="https://formpress.org/images/hero.png" alt="Form Builder Banner" />
             <nav className="nav-links">
                 <Link to="/createForms" className="nav-link">Create Forms</Link>
                 <Link to="/listForms" className="nav-link">Fill Forms</Link>

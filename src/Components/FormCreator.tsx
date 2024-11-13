@@ -8,20 +8,38 @@ function FormCreator() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+    
         if (!formTitle || !formContent) {
             alert("Please fill in both the form title and the form content.");
             return;
         }
-        
-        console.log({
-            title: formTitle,
-            fields: formContent, 
-        });
-        
-        setSubmitted(true);
-        setFormTitle("");
-        setFormContent("");
+    
+        try {
+            // Try parsing the formContent as JSON
+            const inputData = JSON.parse(formContent);
+    
+            // Log or process the input data
+            console.log({
+                title: formTitle,
+                fields: inputData,  // This is the array of form fields
+            });
+    
+            // Example of processing the array (e.g., extracting labels)
+            const fieldLabels = inputData.map((field: { label: any; }) => field.label);
+            console.log("Field labels:", fieldLabels);
+    
+            // Reset the form and set the submission state
+            setSubmitted(true);
+            setFormTitle("");
+            setFormContent("");
+        } catch (error) {
+            // In case of invalid JSON input, show an alert
+            console.error("Invalid JSON input:", error);
+            console.log("The Sample Format for Form Creation is :" + ` [{ "label": "First Name", "name": "firstName", "type": "text", "required": true }, { "label": "Last Name", "name": "lastName", "type": "text" }]`)
+            alert("There was an error parsing the form content. Please make sure it is valid format.");
+        }
     };
+    
 
     return (
         <>

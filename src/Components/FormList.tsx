@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { formsConfigDataSample } from "../assets/formConfigs";
 
 function FormList() {
-    const [formList, setFormList] = useState(formsConfigDataSample);
+    // const [formList, setFormList] = useState(formsConfigDataSample);
+    const [formList] = useState(formsConfigDataSample);
 
     return (
         <>

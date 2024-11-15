@@ -14,6 +14,7 @@ export interface FormConfig {
     id?: string;
     createdDate?: string;
     title: string;
+    version?: string;
     fields: FormField[];
 }
 
@@ -31,6 +32,7 @@ export function formatFieldName(fieldName: string): string {
 export const formsConfigDataSample: FormConfig[] = [
     {
         "id":"10001",
+        "version":"1.0.0",
         "createdDate":"10-10-2024",
         "title": "Employee Personal Information Form",
         "fields": [
@@ -47,6 +49,7 @@ export const formsConfigDataSample: FormConfig[] = [
     },
     {
         "id":"10002",
+        "version":"1.0.1",
         "createdDate":"11-10-2024",
         "title": "Emergency Contact Information",
         "fields": [
@@ -59,6 +62,7 @@ export const formsConfigDataSample: FormConfig[] = [
     },
     {
         "id":"10003",
+        "version":"1.0.0",
         "createdDate":"12-10-2024",
         "title": "Sample Form 1",
         "fields": [

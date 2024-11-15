@@ -93,7 +93,7 @@ function SubmittedForms() {
     ]);
 
     return (
-        <div>
+        <>
             <div style={{ marginLeft: '4rem', marginRight: '4rem', maxWidth: "90vw" }}>
                 <h1>Submitted Form Data</h1>
                 <select
@@ -112,7 +112,7 @@ function SubmittedForms() {
             }
 
             <Link to="/" className="homeLink"> 🔙 Home Page </Link>
-        </div>
+        </>
     )
 }
 

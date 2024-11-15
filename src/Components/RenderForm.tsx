@@ -1,29 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DynamicForm from './DynamicForm';
 import { formsConfigDataSample } from '../assets/formConfigs';
 import { Link } from 'react-router-dom';
 
 const RenderForm: React.FC = () => {
-    const [currentForm, setCurrentForm] = useState<string>("0");
-    // const [formsConfigData, setFormsConfigData] = useState(formsConfigDataSample);
-    const [formsConfigData] = useState(formsConfigDataSample);
+    const [formsConfigData, setFormsConfigData] = useState(formsConfigDataSample[0]);
+
+    useEffect(() => {
+        const query = window?.location?.search
+        if (query) {
+            const formId = query.split('=')[1];
+            const formData = formsConfigDataSample.filter((item) => item?.id == formId)
+            setFormsConfigData(formData[0]);
+        }
+
+
+    }, [])
+
 
     return (
         <div>
-            <div style={{  marginLeft: '4rem',  marginRight: '4rem'}}>
-                <h1>Dynamic Forms Selector</h1>
-                <select
-                    onChange={(e) => setCurrentForm(e.target.value)}
-                    value={currentForm}>
-                    {formsConfigDataSample?.map((form, index) => (
-                        <option key={index} value={`${index}`}>{form.title}</option>
-                    ))}
-                </select>
+            <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                <p>Form ID : {formsConfigData?.id}</p>
+                <p>Version : {formsConfigData?.version}</p>
+                <p>Date : {formsConfigData?.createdDate}</p>
             </div>
-
-            <DynamicForm formConfig={formsConfigData[parseInt(currentForm)]} />
-
-            <Link to="/" className="homeLink"> 🔙 Home Page </Link>
+            <DynamicForm formConfig={formsConfigData} />
+            <div className="homeLink">
+                <Link to="/formList"> 🔙 Form List </Link> |
+                <Link to="/"> Home Page </Link>
+            </div>
         </div>
     );
 };

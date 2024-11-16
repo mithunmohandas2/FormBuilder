@@ -29,11 +29,29 @@ export function formatFieldName(fieldName: string): string {
     return formatted.replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
+
+export interface SubmittedDataList {
+    formId: string,
+    version: string,
+    submitDate: string,
+    submitBy: string,
+    formData: FormDataValues
+}
+
+export interface FormDataValues {
+    [key: string]: string | any;
+}
+
+export interface SubmittedFormProps {
+    formConfig: FormConfig;
+    SubmittedDataList: SubmittedDataList[];
+}
+
 export const formsConfigDataSample: FormConfig[] = [
     {
-        "id":"10001",
-        "version":"1.0.0",
-        "createdDate":"10-10-2024",
+        "id": "10001",
+        "version": "1.0.0",
+        "createdDate": "10-10-2024",
         "title": "Employee Personal Information Form",
         "fields": [
             { "label": "Full Name", "name": "fullName", "type": "text", "required": true },
@@ -48,9 +66,9 @@ export const formsConfigDataSample: FormConfig[] = [
         ],
     },
     {
-        "id":"10002",
-        "version":"1.0.1",
-        "createdDate":"11-10-2024",
+        "id": "10002",
+        "version": "1.0.1",
+        "createdDate": "11-10-2024",
         "title": "Emergency Contact Information",
         "fields": [
             { "label": "Name", "name": "name", "type": "text", "required": true },
@@ -61,13 +79,13 @@ export const formsConfigDataSample: FormConfig[] = [
         ],
     },
     {
-        "id":"10003",
-        "version":"1.0.0",
-        "createdDate":"12-10-2024",
+        "id": "10003",
+        "version": "1.0.0",
+        "createdDate": "12-10-2024",
         "title": "Sample Form 1",
         "fields": [
             {
-                "label": "Employee Full Name",
+                "label": "Full Name",
                 "name": "employeeFullName",
                 "type": "text",
                 "required": true
@@ -223,7 +241,7 @@ export const formsConfigDataSample: FormConfig[] = [
                 "name": "professionalExperience",
                 "type": "grid",
                 "required": true,
-                "gridLength":"3",
+                "gridLength": "3",
                 "gridFields": [
                     {
                         "label": "Company Name",

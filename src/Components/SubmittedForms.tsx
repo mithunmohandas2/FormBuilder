@@ -1,96 +1,101 @@
-import { useState } from "react";
-import { formsConfigDataSample } from "../assets/formConfigs";
+import { useEffect, useState } from "react";
+import { formsConfigDataSample, SubmittedDataList } from "../assets/formConfigs";
 import { Link } from "react-router-dom";
 import FormDataTable from "./FormDataTable";
 
 function SubmittedForms() {
     const [currentForm, setCurrentForm] = useState<string>("0");
-    const [formsConfigData, ] = useState(formsConfigDataSample);
+    const [displayForm, setDisplayForm] = useState<null | SubmittedDataList[]>(null);
+    const [formsConfigData,] = useState(formsConfigDataSample);
     //setFormsConfigData,  setFilledFormData
-    const [filledFormData, ] = useState([
+    const [filledFormData,] = useState<SubmittedDataList[]>([
         {
-            "fullName": "Flavia Warner",
-            "preferredName": "Tucker Forbes",
-            "primaryAddress": "Quam et vitae conseq",
-            "city": "Nesciunt dolorem ex",
-            "state": "Qui sit non veniam",
-            "county": "Quas culpa corporis",
-            "zipCode": "72975",
-            "birthDate": "1994-02-05"
+            "formId": "10001",
+            "version": "1.1.0",
+            "submitDate": "2024-11-16T00:00:00.000Z",
+            "submitBy": "Form 1 user",
+            "formData": {
+                "fullName": "Flavia Warner",
+                "preferredName": "Tucker Forbes",
+                "primaryAddress": "Quam et vitae conseq",
+                "city": "Nesciunt dolorem ex",
+                "state": "Qui sit non veniam",
+                "county": "Quas culpa corporis",
+                "zipCode": "72975",
+                "birthDate": "1994-02-05"
+            }
         },
         {
-            "fullName": "Flavia",
-            "preferredName": "Tuckerbes",
-            "primaryAddress": "Qu vitae conseq",
-            "city": "Nesciunt dolorem ex",
-            "state": "Qui sit non veniam",
-            "county": "Quas culpa corporis",
-            "zipCode": "72975",
-            "birthDate": "1994-02-05"
+            "formId": "10002",
+            "version": "1.1.0",
+            "submitDate": "2024-11-16T00:00:00.000Z",
+            "submitBy": "Form 2 user",
+            "formData": {
+                "fullName": "Flavia",
+                "preferredName": "Tuckerbes",
+                "primaryAddress": "Qu vitae conseq",
+                "city": "Nesciunt dolorem ex",
+                "state": "Qui sit non veniam",
+                "county": "Quas culpa corporis",
+                "zipCode": "72975",
+                "birthDate": "1994-02-05"
+            }
         },
-        // {
-        //     "employeeFullName": "Lee Edwards",
-        //     "preferredName": "Ursa Burnett",
-        //     "primaryAddress": "Quasi dignissimos au",
-        //     "primaryCity": "Molestiae aut volupt",
-        //     "primaryState": "Aut nulla inventore ",
-        //     "primaryCounty": "Voluptates reprehend",
-        //     "primaryZipCode": "86644",
-        //     "supplementalAddress": "Sunt odit id et ani",
-        //     "supplementalCity": "A eum commodi non ac",
-        //     "supplementalState": "Enim saepe incidunt",
-        //     "supplementalCounty": "Aspernatur ex aut ni",
-        //     "supplementalZipCode": "79545",
-        //     "birthDate": "2005-11-28",
-        //     "homeTelephoneNumber": "+1 (217) 561-6376",
-        //     "cellTelephoneNumber": "+1 (974) 599-7828",
-        //     "emergencyContactName": "Oleg Rose",
-        //     "emergencyContactAddress": "Harum quia porro est",
-        //     "emergencyContactCity": "Ut reprehenderit non",
-        //     "emergencyContactStateProvince": "At non blanditiis as",
-        //     "emergencyContactPostalCode": "Eu quas molestiae si",
-        //     "emergencyContactCountry": "In deserunt sit quas",
-        //     "emergencyContactRelationship": "In ut esse magnam ad",
-        //     "emergencyContactCellTelephone": "+1 (707) 837-3449",
-        //     "emergencyContactHomeTelephone": "+1 (409) 128-9352",
-        //     "emergencyContactWorkTelephone": "+1 (149) 738-7534",
-        //     "professionalExperience": [
-        //         {
-        //             "companyName": "Perez Bennett Co",
-        //             "designation": "Sit quaerat vitae ve",
-        //             "fromDate": "1999-09-11",
-        //             "toDate": "2011-07-05"
-        //         },
-        //         {
-        //             "companyName": "Castillo Patrick Traders",
-        //             "designation": "Modi amet quas volu",
-        //             "fromDate": "1970-08-26",
-        //             "toDate": "1980-11-06"
-        //         },
-        //         {
-        //             "companyName": "Kerr Keller Trading",
-        //             "designation": "Autem est nulla eni",
-        //             "fromDate": "2016-08-27",
-        //             "toDate": "2024-07-20"
-        //         }
-        //     ],
-        //     "employeeSignature": "Reprehenderit recusa",
-        //     "date": "2013-04-08",
-        //     "employeeIdentificationNumber": "687",
-        //     "name": "Lucy Hinton",
-        //     "relationship": "Nobis ex anim volupt",
-        //     "cellPhone": "+1 (887) 814-7912",
-        //     "homePhone": "+1 (606) 951-3921",
-        //     "workPhone": "+1 (115) 801-7651",
-        //     "fullName": "Allen Church",
-        //     "city": "Nisi nostrum pariatu",
-        //     "state": "Qui non magnam velit",
-        //     "county": "Magnam fugiat conse",
-        //     "zipCode": "43007",
-        //     "gender": "Male",
-        //     "maritalStatus": "Single"
-        // }
+        {
+            "formId": "10003",
+            "version": "1.1.0",
+            "submitDate": "2024-11-16T00:00:00.000Z",
+            "submitBy": "Sample form 1 user",
+            "formData": {
+                "employeeFullName": "Lee Edwards",
+                "preferredName": "Ursa Burnett",
+                "primaryAddress": "Quasi dignissimos au",
+                "primaryCity": "Molestiae aut volupt",
+                "primaryState": "Aut nulla inventore",
+                "primaryCounty": "Voluptates reprehend",
+                "primaryZipCode": "86644",
+                "supplementalAddress": "Sunt odit id et ani",
+                "supplementalCity": "A eum commodi non ac",
+                "supplementalState": "Enim saepe incidunt",
+                "supplementalCounty": "Aspernatur ex aut ni",
+                "supplementalZipCode": "79545",
+                "birthDate": "2005-11-28",
+                "Phone": "+1 (217) 561-6376",
+                "Mobile": "+1 (974) 599-7828",
+                "professionalExperience": [
+                    {
+                        "companyName": "Perez Bennett Co",
+                        "designation": "Sit quaerat vitae ve",
+                        "fromDate": "1999-09-11",
+                        "toDate": "2011-07-05"
+                    },
+                    {
+                        "companyName": "Castillo Patrick Traders",
+                        "designation": "Modi amet quas volu",
+                        "fromDate": "1970-08-26",
+                        "toDate": "1980-11-06"
+                    },
+                    {
+                        "companyName": "Kerr Keller Trading",
+                        "designation": "Autem est nulla eni",
+                        "fromDate": "2016-08-27",
+                        "toDate": "2024-07-20"
+                    }
+                ],
+                "employeeSignature": "Reprehenderit recusa",
+                "date": "2013-04-08",
+                "employeeIdentificationNumber": "687",
+                "gender": "Male",
+                "maritalStatus": "Single"
+            }
+        }
     ]);
+
+    useEffect(() => {
+        const list = filledFormData.filter((form) => form.formId === currentForm);
+        setDisplayForm(list)
+    }, [currentForm])
+
 
     return (
         <>
@@ -99,16 +104,17 @@ function SubmittedForms() {
                 <select
                     onChange={(e) => setCurrentForm(e.target.value)}
                     value={currentForm}>
+                    <option value="">Select a form</option>
                     {formsConfigDataSample?.map((form, index) => (
-                        <option key={index} value={`${index}`}>{form.title}</option>
+                        <option key={index} value={form.id}>{form.title}</option>
                     ))}
                 </select>
             </div>
 
-            {filledFormData &&
+            {(filledFormData?.length && displayForm) &&
                 <FormDataTable
                     formConfig={formsConfigData[parseInt(currentForm)]}
-                    forms={filledFormData} />
+                    SubmittedDataList={displayForm} />
             }
 
             <Link to="/" className="homeLink"> 🔙 Home Page </Link>

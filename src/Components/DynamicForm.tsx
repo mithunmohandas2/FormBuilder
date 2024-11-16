@@ -31,8 +31,11 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ formConfig }) => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log('Form Submitted:', {
-            formId : formConfig?.id,
-            formData
+            formId: formConfig?.id,
+            formData,
+            version: "1.1.0",
+            submitDate: new Date(),
+            submitBy: "user"
         });
         alert('Data submitted successfully');
         setFormData({}); //Reset the form
@@ -47,7 +50,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ formConfig }) => {
                 <div key={index}>
                     <label>{field?.label}:</label>
                     {field?.type === "select" ? (
-                        <select name={field.name} onChange={handleChange} required={field?.required}  value={formData[field.name] || ''}>
+                        <select name={field.name} onChange={handleChange} required={field?.required} value={formData[field.name] || ''}>
                             <option value="">Select</option>
                             {field?.options?.map((option: any, index: React.Key) => (
                                 <option key={index} value={option}>{option}</option>
@@ -68,8 +71,8 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ formConfig }) => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       {/* Create rows based on the gridLength */}
-                                       {new Array(Number(field?.gridLength) || 0).fill(null).map((_, rowIndex) => (
+                                        {/* Create rows based on the gridLength */}
+                                        {new Array(Number(field?.gridLength) || 0).fill(null).map((_, rowIndex) => (
                                             <tr key={rowIndex}>
                                                 {field?.gridFields?.map((subField: FormField, columnIndex) => (
                                                     <td key={columnIndex}>

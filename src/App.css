@@ -200,7 +200,7 @@ select:focus {
 /* Style the table */
 .form-table {
   width: 100%;
-  max-width: 1200px;
+  /* max-width: 1200px; */
   border-collapse: collapse;
   background-color: #f9f9f9;
   font-family: Arial, sans-serif;

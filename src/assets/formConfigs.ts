@@ -43,7 +43,7 @@ export interface FormDataValues {
 }
 
 export interface SubmittedFormProps {
-    formConfig: FormConfig;
+    formConfig: FormConfig[] | null;
     SubmittedDataList: SubmittedDataList[];
 }
 

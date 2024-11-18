@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { formatFieldName, FormConfig, FormField } from '../assets/formConfigs';
+import React, { useEffect, useState } from 'react';
+import { formatFieldName, FormConfig, FormDataValues, FormField } from '../assets/formConfigs';
 
 interface DynamicFormProps {
     formConfig: FormConfig;
+    SubmittedFormData?: FormDataValues;
 }
 
-const DynamicForm: React.FC<DynamicFormProps> = ({ formConfig }) => {
-    const [formData, setFormData] = useState<any>({});
+const DynamicForm: React.FC<DynamicFormProps> = ({ formConfig, SubmittedFormData = null }) => {
+    const [formData, setFormData] = useState<FormDataValues>({});
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -41,9 +42,18 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ formConfig }) => {
         setFormData({}); //Reset the form
     };
 
+    useEffect(() => {
+        //if filled data available, its preview mode
+        if (SubmittedFormData) {
+            setFormData(SubmittedFormData);
+        }
+    }, [SubmittedFormData]);
+
+
+
     return (
         <form onSubmit={handleSubmit}>
-            <h2>{formConfig.title}</h2>
+            <h2>{formConfig?.title}</h2>
             <hr style={{ margin: 3 }} />
             <br />
             {formConfig?.fields?.map((field: FormField, index: number) => (
@@ -107,7 +117,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ formConfig }) => {
                     )}
                 </div>
             ))}
-            <button type="submit">Submit</button>
+            {!SubmittedFormData && <button type="submit">Submit</button>}
         </form>
     );
 };

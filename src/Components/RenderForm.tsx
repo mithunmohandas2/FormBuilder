@@ -13,8 +13,6 @@ const RenderForm: React.FC = () => {
             const formData = formsConfigDataSample.filter((item) => item?.id == formId)
             setFormsConfigData(formData[0]);
         }
-
-
     }, [])
 
 

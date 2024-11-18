@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { formsConfigDataSample, SubmittedDataList } from "../assets/formConfigs";
+import { FormConfig, formsConfigDataSample, SubmittedDataList } from "../assets/formConfigs";
 import { Link } from "react-router-dom";
 import FormDataTable from "./FormDataTable";
 
 function SubmittedForms() {
     const [currentForm, setCurrentForm] = useState<string>("0");
     const [displayForm, setDisplayForm] = useState<null | SubmittedDataList[]>(null);
-    const [formsConfigData,] = useState(formsConfigDataSample);
+    const [formsConfigData, setFormsConfigData] = useState<FormConfig[] | null>(null)
     //setFormsConfigData,  setFilledFormData
     const [filledFormData,] = useState<SubmittedDataList[]>([
         {
@@ -31,14 +31,11 @@ function SubmittedForms() {
             "submitDate": "2024-11-16T00:00:00.000Z",
             "submitBy": "Form 2 user",
             "formData": {
-                "fullName": "Flavia",
-                "preferredName": "Tuckerbes",
-                "primaryAddress": "Qu vitae conseq",
-                "city": "Nesciunt dolorem ex",
-                "state": "Qui sit non veniam",
-                "county": "Quas culpa corporis",
-                "zipCode": "72975",
-                "birthDate": "1994-02-05"
+                "name": "Flavia",
+                "relationship": "cousin",
+                "homePhone": "7292275",
+                "workPhone": "712975",
+                "cellPhone": "7211975",
             }
         },
         {
@@ -92,9 +89,18 @@ function SubmittedForms() {
     ]);
 
     useEffect(() => {
-        const list = filledFormData.filter((form) => form.formId === currentForm);
-        setDisplayForm(list)
-    }, [currentForm])
+        if (currentForm) {
+            //submitted data
+            const list = filledFormData.filter((form) => form.formId === currentForm);
+            setDisplayForm(list);
+
+            //Empty Form Data
+            const configlist = formsConfigDataSample.filter((form) => form.id === currentForm);
+            setFormsConfigData(configlist);
+        } else {
+            setDisplayForm(null);
+        }
+    }, [currentForm]);
 
 
     return (
@@ -113,7 +119,7 @@ function SubmittedForms() {
 
             {(filledFormData?.length && displayForm) &&
                 <FormDataTable
-                    formConfig={formsConfigData[parseInt(currentForm)]}
+                    formConfig={formsConfigData}
                     SubmittedDataList={displayForm} />
             }
 

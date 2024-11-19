@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 function FormCreator() {
@@ -12,7 +13,7 @@ function FormCreator() {
         e.preventDefault();
 
         if (!formTitle || !formContent) {
-            alert("Please fill in both the form title and the form content.");
+            toast.error("Please fill in both the form title and the form content.");
             return;
         }
 
@@ -21,7 +22,7 @@ function FormCreator() {
 
             console.log({
                 title: formTitle,
-                version:formVersion,
+                version: formVersion,
                 createdDate,
                 fields: inputData,  // This is the array of form fields
             });
@@ -38,13 +39,14 @@ function FormCreator() {
             // In case of invalid JSON input, show an alert
             console.error("Invalid JSON input:", error);
             console.log("The Sample Format for Form Creation is :" + ` [{ "label": "First Name", "name": "firstName", "type": "text", "required": true }, { "label": "Last Name", "name": "lastName", "type": "text" }]`)
-            alert("There was an error parsing the form content. Please make sure it is valid format.");
+            toast.error("There was an error parsing the form content. Please make sure it is valid format.");
         }
     };
 
 
     return (
         <>
+            <Toaster />
             <form style={{ width: "70vw", maxWidth: "70vw" }} onSubmit={handleSubmit}>
                 <h1>Form Creator</h1>
 

@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { formsConfigDataSample } from "../assets/formConfigs";
 
 function FormList() {
     // const [formList, setFormList] = useState(formsConfigDataSample);
-    const [formList] = useState(formsConfigDataSample);
+    const [formList, setFormList] = useState(formsConfigDataSample);
+
+    useEffect(() => {
+            //API 2 call here
+            setFormList(formsConfigDataSample); // Pass API response here
+    }, [])
+    
 
     return (
         <>
@@ -15,7 +21,7 @@ function FormList() {
             <div style={{ height: '80vh', overflow: 'scroll' }}>
                 <div style={{ marginLeft: '20px', marginRight: '20px', }}>
                     <Link to={"/createForms"}>
-                        <button style={{ width: '130px' }}><b>+ New Form</b></button>
+                        <button style={{ width: '150px' }}><b>+ New Form</b></button>
                     </Link>
                 </div>
 

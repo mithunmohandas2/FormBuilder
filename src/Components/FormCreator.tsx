@@ -1,6 +1,7 @@
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { createFormAPI } from "../services/interactionsAPI";
 
 function FormCreator() {
     const [formContent, setFormContent] = useState("");
@@ -9,7 +10,7 @@ function FormCreator() {
     const [createdDate, setCreatedDate] = useState("1.0.0");
     const [submitted, setSubmitted] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!formTitle || !formContent) {
@@ -19,17 +20,22 @@ function FormCreator() {
 
         try {
             const inputData = JSON.parse(formContent);
-
-            console.log({
+            const APIData = {
                 title: formTitle,
                 version: formVersion,
                 createdDate,
-                fields: inputData,  // This is the array of form fields
-            });
+                fields: inputData,
+            }
+            console.log(APIData);  //test
 
-            // Example of processing the array (e.g., extracting labels)
-            const fieldLabels = inputData.map((field: { label: any; }) => field.label);
-            console.log("Field labels:", fieldLabels);
+            //API 1 call here
+            const response = await createFormAPI(APIData);
+            if (response?.data) {
+                toast.success('Form created successfully');
+            }
+
+            // const fieldLabels = inputData.map((field: { label: any; }) => field.label);
+            // console.log("Field labels:", fieldLabels); //test
 
             // Reset the form and set the submission state
             setSubmitted(true);

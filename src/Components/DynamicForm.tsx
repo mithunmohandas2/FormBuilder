@@ -32,14 +32,19 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ formConfig, SubmittedFormData
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Form Submitted:', {
+
+        const APIData = {
             formId: formConfig?.id,
             formData,
             version: "1.1.0",
             submitDate: new Date(),
             submitBy: "user"
-        });
-        toast.success('Data submitted successfully');
+        }
+
+        console.log(APIData);
+        // API 3 here pass APIData as parameter
+
+
         setFormData({}); //Reset the form
     };
 

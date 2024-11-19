@@ -42,6 +42,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ formConfig, SubmittedFormData
         }
 
         console.log(APIData);
+        toast.success("Form Submitted Successfully");
         // API 3 here pass APIData as parameter
 
 

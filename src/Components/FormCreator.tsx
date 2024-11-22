@@ -2,12 +2,13 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { createFormAPI } from "../services/interactionsAPI";
+import { FormConfig } from "../assets/formConfigs";
 
 function FormCreator() {
     const [formContent, setFormContent] = useState("");
     const [formTitle, setFormTitle] = useState("");
     const [formVersion, setFormVersion] = useState("1.0.0");
-    const [createdDate, setCreatedDate] = useState("1.0.0");
+    const [createdDate, setCreatedDate] = useState('');
     const [submitted, setSubmitted] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -18,19 +19,22 @@ function FormCreator() {
             return;
         }
 
+        if (!formVersion) toast.error('Provide a form version');
+
         try {
             const inputData = JSON.parse(formContent);
-            const APIData = {
+            const data = inputData.map((item: any) => item)
+            const APIData: FormConfig = {
                 title: formTitle,
                 version: formVersion,
                 createdDate,
-                fields: inputData,
+                fields: data,
             }
             console.log(APIData);  //test
 
             //API 1 call here
             const response = await createFormAPI(APIData);
-            if (response?.data) {
+            if (response) {
                 toast.success('Form created successfully');
             }
 
@@ -48,7 +52,6 @@ function FormCreator() {
             toast.error("There was an error parsing the form content. Please make sure it is valid format.");
         }
     };
-
 
     return (
         <>

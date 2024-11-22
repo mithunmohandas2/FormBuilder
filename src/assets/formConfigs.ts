@@ -1,4 +1,3 @@
-// formConfigs.ts
 export interface FormField {
     label: string;
     name: string;
@@ -6,7 +5,7 @@ export interface FormField {
     placeholder?: string;
     required?: boolean;
     options?: string[];  // Only applicable for "select" fields
-    gridFields?: FormField[]; // Only applicable for "grid" fields
+    nestedFields?: FormField[]; // Only applicable for "grid" fields
     gridLength?: string; // Only applicable for "grid" fields
 }
 
@@ -242,7 +241,7 @@ export const formsConfigDataSample: FormConfig[] = [
                 "type": "grid",
                 "required": true,
                 "gridLength": "3",
-                "gridFields": [
+                "nestedFields": [
                     {
                         "label": "Company Name",
                         "name": "companyName",

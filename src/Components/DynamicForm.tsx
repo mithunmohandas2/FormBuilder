@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { formatFieldName, FormConfig, FormDataValues, FormField } from '../assets/formConfigs';
 import toast, { Toaster } from 'react-hot-toast';
+import { submitFormAPI } from '../services/interactionsAPI';
 
 interface DynamicFormProps {
     formConfig: FormConfig;
@@ -30,22 +31,21 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ formConfig, SubmittedFormData
         });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         const APIData = {
-            formId: formConfig?.id,
-            formData,
+            formId: formConfig?.id!,
             version: "1.1.0",
-            submitDate: new Date(),
+            submitDate: new Date().toISOString().split('T')[0], // Formats to yyyy-mm-dd
+            formData,
             submitBy: "user"
         }
-
-        console.log(APIData);
-        toast.success("Form Submitted Successfully");
-        // API 3 here pass APIData as parameter
-
-
+        console.log(APIData);  //test
+        const response = await submitFormAPI(APIData);
+        if (response) {
+            toast.success('Form submitted successfully');
+        }
         setFormData({}); //Reset the form
     };
 
@@ -55,8 +55,6 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ formConfig, SubmittedFormData
             setFormData(SubmittedFormData);
         }
     }, [SubmittedFormData]);
-
-
 
     return (
         <>
@@ -80,8 +78,8 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ formConfig, SubmittedFormData
                                     <table className="form-table">
                                         <thead>
                                             <tr>
-                                                {/* Dynamically generate column headers based on the gridFields */}
-                                                {field?.gridFields?.map((subField, columnIndex) => (
+                                                {/* Dynamically generate column headers based on the nestedFields */}
+                                                {field?.nestedFields?.map((subField, columnIndex) => (
                                                     <th style={{ textAlign: "center", backgroundColor: 'lightgrey', color: '#333' }} key={columnIndex}>
                                                         {formatFieldName(subField.label)} {/* Assuming you want the label as column header */}
                                                     </th>
@@ -90,9 +88,9 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ formConfig, SubmittedFormData
                                         </thead>
                                         <tbody>
                                             {/* Create rows based on the gridLength */}
-                                            {new Array(Number(field?.gridLength) || 0).fill(null).map((_, rowIndex) => (
+                                            {new Array(Number(field?.gridLength) || 3).fill(null).map((_, rowIndex) => (
                                                 <tr key={rowIndex}>
-                                                    {field?.gridFields?.map((subField: FormField, columnIndex) => (
+                                                    {field?.nestedFields?.map((subField: FormField, columnIndex) => (
                                                         <td key={columnIndex}>
                                                             <input
                                                                 name={`${field.name}[${rowIndex}][${subField.name}]`} // Ensure a unique name for each input

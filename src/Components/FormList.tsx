@@ -1,16 +1,29 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { formsConfigDataSample } from "../assets/formConfigs";
+import { FormConfig, formsConfigDataSample } from "../assets/formConfigs";
+import toast from "react-hot-toast";
+import { getFormAPI } from "../services/interactionsAPI";
 
 function FormList() {
-    // const [formList, setFormList] = useState(formsConfigDataSample);
-    const [formList, setFormList] = useState(formsConfigDataSample);
+    const [formList, setFormList] = useState<null | FormConfig[]>(null);
 
     useEffect(() => {
-            //API 2 call here
-            setFormList(formsConfigDataSample); // Pass API response here
+        //API 2 call here
+        // setFormList(formsConfigDataSample); //Uncomment to Load Dummy Data
+        try {
+            async function getAllForms() {
+                const response = await getFormAPI();
+                if (response) {
+                    // console.log(response); //check where the data is exactly .. response.data or any other object and set accordingly
+                    setFormList(response); // Pass exact API response here
+                }
+            }
+            getAllForms();
+        } catch (error) {
+            toast.error("Unable to retrieve forms");
+        }
     }, [])
-    
+
 
     return (
         <>
@@ -37,7 +50,7 @@ function FormList() {
                             </tr>
                         </thead>
                         <tbody>
-                            {formList?.map((form, index) => (
+                            {formList?.length ? formList?.map((form, index) => (
                                 <tr key={index}>
                                     <td className="text-right">{index + 1}</td>
                                     <td>
@@ -55,7 +68,7 @@ function FormList() {
                                         </div>
                                     </td>
                                 </tr>
-                            ))}
+                            )) : null}
                         </tbody>
                     </table>
                 </div>

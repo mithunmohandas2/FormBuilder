@@ -10,6 +10,13 @@ export const axiosInterceptor = () => {
             // If token exists, set it as an Authorization header
             config.headers.Authorization = `${token}`;
         }
+        // Add Content-Type header if not already set
+        if (!config.headers['Content-Type']) {
+            config.headers['Content-Type'] = 'application/json'; // Default to JSON
+        }
+
+        // Add Accept header if required
+        config.headers.Accept = 'application/json';
         return config;
     }, error => {
         // Handle request errors

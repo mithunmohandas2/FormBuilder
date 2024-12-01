@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FormConfig, SubmittedDataList, submittedFormsListSample, formsConfigDataSample } from "../assets/formConfigs";
+import { FormConfig, SubmittedDataList } from "../assets/formConfigs";
 import { Link } from "react-router-dom";
 import FormDataTable from "./FormDataTable";
 import toast, { Toaster } from "react-hot-toast";

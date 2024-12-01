@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FormConfig, formsConfigDataSample } from "../assets/formConfigs";
+import { FormConfig } from "../assets/formConfigs";
 import toast, { Toaster } from "react-hot-toast";
 import { getFormAPI } from "../services/interactionsAPI";
 

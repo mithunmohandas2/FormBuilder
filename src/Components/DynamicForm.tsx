@@ -6,9 +6,10 @@ import { submitFormAPI } from '../services/interactionsAPI';
 interface DynamicFormProps {
     formConfig: FormConfig;
     SubmittedFormData?: FormDataValues;
+    PreviewMode?: boolean
 }
 
-const DynamicForm: React.FC<DynamicFormProps> = ({ formConfig, SubmittedFormData = null }) => {
+const DynamicForm: React.FC<DynamicFormProps> = ({ formConfig, SubmittedFormData = null, PreviewMode = false }) => {
     const [formData, setFormData] = useState<FormDataValues>({});
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -123,7 +124,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ formConfig, SubmittedFormData
                         )}
                     </div>
                 ))}
-                {!SubmittedFormData && <button type="submit">Submit</button>}
+                {!SubmittedFormData && <button type="submit" disabled={PreviewMode}>Submit</button>}
             </form>
             <Toaster />
         </>

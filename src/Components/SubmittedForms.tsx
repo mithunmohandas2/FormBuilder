@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FormConfig, SubmittedDataList, submittedFormsListSample, formsConfigDataSample } from "../assets/formConfigs";
 import { Link } from "react-router-dom";
 import FormDataTable from "./FormDataTable";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { getFormAPI, getSubmittedFormsAPI } from "../services/interactionsAPI";
 
 function SubmittedForms() {
@@ -76,6 +76,7 @@ function SubmittedForms() {
                     SubmittedDataList={displayForm} />
             }
 
+            <Toaster />
             <Link to="/" className="homeLink"> 🔙 Home Page </Link>
         </>
     )

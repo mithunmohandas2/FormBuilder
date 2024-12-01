@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FormConfig, formsConfigDataSample } from "../assets/formConfigs";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { getFormAPI } from "../services/interactionsAPI";
 
 function FormList() {
@@ -73,7 +73,8 @@ function FormList() {
                     </table>
                 </div>
             </div>
-
+            
+            <Toaster />
             <Link to="/" className="homeLink"> 🔙 Home Page </Link>
         </>
     )

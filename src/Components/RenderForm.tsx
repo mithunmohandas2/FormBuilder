@@ -3,7 +3,7 @@ import DynamicForm from './DynamicForm';
 import { formsConfigDataSample } from '../assets/formConfigs';
 import { Link } from 'react-router-dom';
 import { getFormAPI } from '../services/interactionsAPI';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 const RenderForm: React.FC = () => {
     const [formsConfigData, setFormsConfigData] = useState(formsConfigDataSample[0]);
@@ -30,6 +30,7 @@ const RenderForm: React.FC = () => {
 
     return (
         <div>
+            <Toaster />
             <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
                 <p>Form ID : {formsConfigData?.id}</p>
                 <p>Version : {formsConfigData?.version}</p>

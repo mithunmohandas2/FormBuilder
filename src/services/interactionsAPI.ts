@@ -10,8 +10,7 @@ export const createFormAPI = async (data: FormConfig) => {
             return response
         }
     } catch (error) {
-        console.error('Error:', (error as Error).message, '|', error);
-        return error
+        throw new Error((error as Error).message);
     }
 }
 
@@ -23,8 +22,7 @@ export const submitFormAPI = async (data: SubmittedDataList) => {
             return response
         }
     } catch (error) {
-        console.error('Error:', (error as Error).message, '|', error);
-        return error
+        throw new Error((error as Error).message);
     }
 }
 
@@ -36,8 +34,7 @@ export const getFormAPI = async () => {
             return response.data
         }
     } catch (error) {
-        console.error('Error:', (error as Error).message, '|', error);
-        return error
+        throw new Error((error as Error).message);
     }
 }
 
@@ -49,7 +46,21 @@ export const getSubmittedFormsAPI = async () => {
             return response.data
         }
     } catch (error) {
-        console.error('Error:', (error as Error).message, '|', error);
-        return error
+        throw new Error((error as Error).message);
     }
 }
+
+export const generateFormData = async (data: { file: File; prompt: string }) => {
+    const formData = new FormData();
+    formData.append("file", data.file);
+    formData.append("prompt", data.prompt);
+
+    const url = baseUrlAPI + '/FormEngineCreate/GetSubmittedforms';
+
+    const response = await axios.post(url, formData)
+    if (response?.status && response?.data) {
+        return response.data
+    } else {
+        throw new Error("Failed to generate form data from PDF");
+    }
+};

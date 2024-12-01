@@ -5,6 +5,7 @@ import FormCreator from "./Components/FormCreator";
 import HomePage from "./Components/HomePage";
 import SubmittedForms from "./Components/SubmittedForms";
 import FormList from "./Components/FormList";
+import FormFromPDF from "./Components/FormFromPDF";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/createForms" element={<FormCreator />} />
         <Route path="/form" element={<RenderForm />} />
         <Route path="/submittedForms" element={<SubmittedForms />} />
+        <Route path="/formsFromPDF" element={<FormFromPDF />} />
       </Routes>
     </Router>
   );
